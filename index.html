@@ -1273,10 +1273,10 @@
             phraseEl.textContent = phraseData.text;
             phraseEl.dataset.order = phraseData.order;
             
-            // Размещаем на платформе
+            // Размещаем на платформе (без учета камеры - она добавится в updateVisualElements)
             phraseEl.style.position = 'absolute';
             phraseEl.style.left = (randomPlatform.x + randomPlatform.width/2 - 50) + 'px';
-            phraseEl.style.top = (randomPlatform.y - 40 + game.camera.y) + 'px';
+            phraseEl.style.top = (randomPlatform.y - 40) + 'px';
             phraseEl.style.zIndex = '10';
             
             // Добавляем в массив активных фраз
@@ -1451,12 +1451,12 @@
             game.stars++;
             game.score += 500;
             
-            // Показываем золотой плюсик для звезды
+            // Показываем золотой плюсик для звезды (с учетом камеры)
             const plusElement = document.createElement('div');
             plusElement.className = 'plus-effect star-plus';
             plusElement.textContent = '+500';
             plusElement.style.left = star.x + 'px';
-            plusElement.style.top = star.y + 'px';
+            plusElement.style.top = (star.y + game.camera.y) + 'px'; // Учитываем камеру
             plusElement.style.color = '#ffd700';
             plusElement.style.textShadow = '0 0 10px rgba(255, 215, 0, 0.8)';
             document.getElementById('gameContainer').appendChild(plusElement);
@@ -1485,12 +1485,12 @@
             game.phrases++;
             game.score += 333; // Фразы дают больше очков
             
-            // Показываем зеленый плюсик
+            // Показываем зеленый плюсик (с учетом камеры)
             const plusElement = document.createElement('div');
             plusElement.className = 'plus-effect';
             plusElement.textContent = '+333';
             plusElement.style.left = phrase.x + 'px';
-            plusElement.style.top = phrase.y + 'px';
+            plusElement.style.top = (phrase.y + game.camera.y) + 'px'; // Учитываем камеру
             document.getElementById('gameContainer').appendChild(plusElement);
             
             // Убираем плюсик через 1 секунду
